@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeber-Verse Nexus Hub</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Expressive Material Design Color Palette */
+            --color-primary: #673AB7; /* Deep Purple */
+            --color-on-primary: #FFFFFF;
+            --color-secondary: #00BCD4; /* Cyan/Teal */
+            --color-tertiary: #FF5722; /* Deep Orange */
+            --color-surface: #F3E5F5; /* Light Lavender */
+            --color-on-surface: #1E1E1E;
+            --color-outline: #9C27B0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-surface);
+            color: var(--color-on-surface);
+            min-height: 100vh;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Material Expressive Card Style */
+        .meeber-card {
+            background-color: white;
+            border-radius: 28px; /* High radius for Expressive look */
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            will-change: transform;
+            border: 2px solid var(--color-outline);
+        }
+        .meeber-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px -8px rgba(0, 0, 0, 0.15), 0 6px 8px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Expressive Button Style (Elevated) */
+        .meeber-btn {
+            background-color: var(--color-primary);
+            color: var(--color-on-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* Pill shape */
+            font-weight: 600;
+            box-shadow: 0 4px 15px -3px rgba(103, 58, 183, 0.5); /* Primary color shadow */
+            transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+        }
+        .meeber-btn:hover {
+            background-color: #512DA8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px -5px rgba(103, 58, 183, 0.7);
+        }
+        .meeber-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Navigation Style */
+        .nav-item {
+            color: var(--color-on-surface);
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            padding-bottom: 0.5rem;
+            cursor: pointer;
+            transition: color 0.2s, border-bottom-color 0.2s, transform 0.1s;
+        }
+        .nav-item:hover {
+            color: var(--color-primary);
+        }
+        .nav-item.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-secondary);
+            font-weight: 700;
+            transform: translateY(-1px);
+        }
+
+        /* Page Transition Animation */
+        .page {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Meeber Worm Icon (SVG style) */
+        .meeber-worm {
+            animation: bounce 2s infinite ease-in-out;
+            fill: var(--color-primary);
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- Header / Navigation Bar -->
+    <header class="max-w-6xl mx-auto mb-10">
+        <div class="flex items-center justify-between p-4 bg-white rounded-3xl shadow-xl border border-purple-200">
+            <h1 class="text-3xl font-black text-purple-700 flex items-center">
+                <svg class="meeber-worm w-8 h-8 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="fill: var(--color-primary);">
+                    <path d="M12 2a10 10 0 00-7.74 16.51A10 10 0 1012 2zm-1 15c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zM12 7a2 2 0 100 4 2 2 0 000-4z"/>
+                </svg>
+                Meeber-Verse
+            </h1>
+            <nav class="flex space-x-6">
+                <a data-page="home" class="nav-item active">Home</a>
+                <a data-page="nexus" class="nav-item">Meeber Nexus</a>
+                <a data-page="diary" class="nav-item">Meeber Diary</a>
+                <!-- Link to survey as mentioned in the guide -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKHn4JNMvuiwBOvtvdLMCEjur9pe6R5jlFbnBCl82xwWuNAA/viewform?usp=dialog" target="_blank" class="text-xs self-center text-red-500 hover:text-red-700 font-bold border-2 border-red-500 rounded-full px-3 py-1 transition duration-200">
+                    Survey!
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="content-container" class="max-w-6xl mx-auto">
+
+        <!-- HOME PAGE (Updated) -->
+        <section id="home-page" class="page block">
+            <div class="meeber-card p-8 bg-purple-100/50 text-center">
+                <h2 class="text-5xl font-extrabold text-purple-800 mb-4">Welcome to the Meeber-Verse!</h2>
+                <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+                    This is the ultimate hub for all things Meeber and the expansive Meeber Nexus.
+                    From deep universe stories and detailed Meeber descriptions to exciting games and interactive content,
+                    start your journey into the world of Meebers right here!
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <!-- Update Alert/News Block -->
+                    <div class="p-3 bg-cyan-200 rounded-xl font-mono text-cyan-800 border-l-4 border-cyan-500 font-semibold inline-flex items-center justify-center">
+                        <span class="mr-2">✨</span> (10/18) Meeber Nexus just got a whole new look!
+                    </div>
+                    <button onclick="changePage('nexus')" class="meeber-btn bg-tertiary hover:bg-red-600 self-center">
+                        Jump into the Nexus →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Simple, expressive placeholder for visual interest -->
+            <div class="mt-8 grid md:grid-cols-3 gap-6">
+                <div class="meeber-card p-6 bg-white flex items-center justify-center text-center">
+                    <span class="text-4xl">📚</span>
+                    <span class="ml-3 font-semibold text-gray-700">Universe Stories</span>
+                </div>
+                <div class="meeber-card p-6 bg-white flex items-center justify-center text-center">
+                    <span class="text-4xl">🐛</span>
+                    <span class="ml-3 font-semibold text-gray-700">Meeber Descriptions</span>
+                </div>
+                <div class="meeber-card p-6 bg-white flex items-center justify-center text-center">
+                    <span class="text-4xl">🕹️</span>
+                    <span class="ml-3 font-semibold text-gray-700">Exciting Games</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- MEEBER NEXUS PAGE (Kept the same) -->
+        <section id="nexus-page" class="page hidden">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-6 border-b-4 border-tertiary pb-2">Meeber Nexus: Timelines & Arcs</h2>
+
+            <!-- TIMELINES CONTAINER -->
+            <div class="space-y-10">
+
+                <!-- ALPHA TIMELINE -->
+                <div class="p-6 meeber-card bg-orange-50">
+                    <h3 class="text-2xl font-extrabold text-orange-700 mb-4 flex items-center">
+                        <span class="mr-3 p-2 bg-orange-300 rounded-full">A</span> Alpha Timeline
+                    </h3>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                        <!-- Mr. Z Arc -->
+                        <div class="p-5 bg-white rounded-2xl shadow-md border-l-4 border-purple-500 hover:shadow-lg">
+                            <p class="text-sm text-purple-600 font-bold mb-2">Mr. Z Arc</p>
+                            <a href="https://docs.google.com/document/d/16FweBLpmnFhvuUCktx5WCM3oEt62pC0aUW3xVCg3oHw/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-purple-700 transition duration-150">Mr. Z: A Backstory</a>
+                            <a href="https://docs.google.com/document/d/1YU4DNrImZRtZStJDFVVZ571w12pMaVQY4J7C5oza2NY/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-purple-700 transition duration-150">The Meeber Gang</a>
+                            <a href="https://docs.google.com/document/d/1cbV7T_DFI9jtt07OoYK8jib4s4XJ6Ei0I2OOMgh9fC0/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-purple-700 transition duration-150">Chase's Isolation</a>
+                        </div>
+
+                        <!-- Bidelspach Arc -->
+                        <div class="p-5 bg-white rounded-2xl shadow-md border-l-4 border-cyan-500 hover:shadow-lg">
+                            <p class="text-sm text-cyan-600 font-bold mb-2">Bidelspach Arc</p>
+                            <a href="https://docs.google.com/document/d/16poHVSxyk8i0wghhGxf8JLxFvgfA3debehgbSA8RMW4/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-cyan-700 transition duration-150">Herbert's New Job</a>
+                            <a href="https://docs.google.com/document/d/1uoI-SGImUWQpB91BZ0GtydKwtqz5mpONGLs3mbJ3dlc/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-cyan-700 transition duration-150">World War Meeb</a>
+                        </div>
+
+                        <!-- Fracture Arc -->
+                        <div class="p-5 bg-white rounded-2xl shadow-md border-l-4 border-red-500 hover:shadow-lg">
+                            <p class="text-sm text-red-600 font-bold mb-2">Fracture Arc</p>
+                            <a href="https://docs.google.com/document/d/1y4RyYfTqlzVhMi4q7UGAeKrCysv3VMrEe2vWQa7VvPs/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-red-700 transition duration-150">Adam's Adventure</a>
+                            <a href="https://docs.google.com/document/d/1-VUXp3qhWau-OXwmwFtJQNgXFK2_fo5NuH09Izid1Ds/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-red-700 transition duration-150">Ethereal Fracture</a>
+                            <a href="https://docs.google.com/document/d/1wzPsRqcNaHbdAJG5K3HYEOYB0-yx18TOuy0QhYGLLxI/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-red-700 transition duration-150">Meeble in Time</a>
+                        </div>
+
+                        <!-- What-Ifs -->
+                        <div class="p-5 bg-white rounded-2xl shadow-md border-l-4 border-gray-500 hover:shadow-lg">
+                            <p class="text-sm text-gray-600 font-bold mb-2">What-Ifs</p>
+                            <a href="https://drive.google.com/a/wordtotheboro.org/open?id=11TXITAhGq48FRGI5n18txoi_tmmpNhD9_XK_izQIJPQ" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-gray-700 transition duration-150">Meeber Crew</a>
+                            <a href="https://docs.google.com/document/d/1PnXPQaxjkazZF87SwNb1X2EZsCFpM0DE4L2tJ7-lfUM/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-gray-700 transition duration-150">Owen's Reunion</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BETA TIMELINE -->
+                <div class="p-6 meeber-card bg-purple-50">
+                    <h3 class="text-2xl font-extrabold text-purple-700 mb-4 flex items-center">
+                        <span class="mr-3 p-2 bg-purple-300 rounded-full">B</span> Beta Timeline
+                    </h3>
+                    <div class="grid sm:grid-cols-2 gap-6">
+
+                        <!-- Flarvengash Arc -->
+                        <div class="p-5 bg-white rounded-2xl shadow-md border-l-4 border-green-500 hover:shadow-lg">
+                            <p class="text-sm text-green-600 font-bold mb-2">Flarvengash Arc</p>
+                            <a href="https://docs.google.com/document/d/1DargJlFnQTX1OecnL2DTMRGpWMB1n42KWxXXcMPAeDs/edit?tab=t.dynbau3dywb6#heading=h.hx6cn83f9nqm" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-green-700 transition duration-150">Stringy Scoundral</a>
+                            <a href="https://docs.google.com/document/d/1Wimn-OM512g6G9CJCglMRCXqIg15qFiyAwh1gAD4D-8/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-green-700 transition duration-150">Stringy Spacefront</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BONUS CONTENT -->
+                <div class="p-6 meeber-card bg-cyan-50">
+                    <h3 class="text-2xl font-extrabold text-cyan-700 mb-4 flex items-center">
+                        <span class="mr-3 p-2 bg-cyan-300 rounded-full">★</span> Bonus Content
+                    </h3>
+                    <div class="grid sm:grid-cols-2 gap-6">
+
+                        <!-- Meeber Specials -->
+                        <div class="p-5 bg-white rounded-2xl shadow-md border-l-4 border-yellow-500 hover:shadow-lg">
+                            <p class="text-sm text-yellow-600 font-bold mb-2">Meeber Specials</p>
+                            <a href="https://docs.google.com/document/d/1rgQ7o8YpxJIHhLp5k35Skq33cb6TTHKWJdFhx6zgiu8/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-yellow-700 transition duration-150">A Trip to Dragon World</a>
+                            <a href="https://docs.google.com/document/d/1vJROh_0VLpf1NVb5MIbD7A9vqXLIHokm4yIHXFtvU0k/edit?tab=t.0" target="_blank" class="block text-lg font-semibold text-gray-800 hover:text-yellow-700 transition duration-150">Squid High</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MEEBER DIARY PAGE (Updated) -->
+        <section id="diary-page" class="page hidden">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-6 border-b-4 border-secondary pb-2">The Meeber Diary</h2>
+
+            <div class="meeber-card p-10 text-center bg-teal-100/50">
+                <p class="text-xl font-medium text-gray-800 mb-8 max-w-2xl mx-auto">
+                    Peek behind the curtain! The Meeber Diary contains raw, unedited, and chronological entries detailing the history, development, and daily lore of the entire Meeber-Verse.
+                </p>
+
+                <!-- Link to the Diary -->
+                <a href="https://drive.google.com/open?id=1b-FpGB6rEI88ooLDakLvg2uEFBfi6Ye4ZzFbzpP0zAc" target="_blank" class="meeber-btn bg-teal-600 hover:bg-teal-700 text-lg">
+                    Access the Full Meeber Diary →
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- Nifty Animations / Page Switching Logic ---
+
+        // Get all navigation links and page sections
+        const navItems = document.querySelectorAll('.nav-item');
+        const pages = document.querySelectorAll('.page');
+        const contentContainer = document.getElementById('content-container');
+
+        // Function to handle page change
+        function changePage(pageId) {
+            // 1. Update Navigation Active State
+            navItems.forEach(item => {
+                if (item.dataset.page === pageId) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            // 2. Animate out and then in
+            // Add an exit animation class before hiding
+            contentContainer.classList.add('animate-out');
+
+            // Wait for a brief moment to allow the animation to start (optional, but smoother)
+            setTimeout(() => {
+                // 3. Hide all pages
+                pages.forEach(page => {
+                    page.classList.add('hidden');
+                    page.classList.remove('block');
+                });
+
+                // 4. Show the new page
+                const newPage = document.getElementById(pageId + '-page');
+                if (newPage) {
+                    newPage.classList.remove('hidden');
+                    newPage.classList.add('block');
+                }
+
+                // 5. Remove the exit animation and let the slideIn animation take over
+                contentContainer.classList.remove('animate-out');
+            }, 50); // Short delay for visual effect
+
+            // Update URL hash for sharing/bookmarking
+            window.location.hash = pageId;
+        }
+
+        // Event listener for navigation clicks
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const pageId = e.target.dataset.page;
+                changePage(pageId);
+            });
+        });
+
+        // Initial load based on URL hash
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1); // Remove '#'
+            if (hash && document.getElementById(hash + '-page')) {
+                changePage(hash);
+            } else {
+                changePage('home'); // Default to home
+            }
+        });
+    </script>
+</body>
+</html>
